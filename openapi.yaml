@@ -804,6 +804,8 @@ components:
         id:
           type: string
           format: uuid
+          x-oapi-codegen-extra-tags:
+            gorm: "primaryKey"
         name:
           type: string
         projectId:
@@ -832,6 +834,8 @@ components:
         id:
           type: string
           format: uuid
+          x-oapi-codegen-extra-tags:
+            gorm: "primaryKey"
         name:
           type: string
         done:
@@ -862,6 +866,8 @@ components:
         id:
           type: string
           format: uuid
+          x-oapi-codegen-extra-tags:
+            gorm: "primaryKey"
         comment:
           type: string
         creatorId:
@@ -889,6 +895,8 @@ components:
         id:
           type: string
           format: uuid
+          x-oapi-codegen-extra-tags:
+            gorm: "primaryKey"
         name:
           type: string
         start:
@@ -925,6 +933,8 @@ components:
         id:
           type: string
           format: uuid
+          x-oapi-codegen-extra-tags:
+            gorm: "primaryKey"
         name:
           type: string
         description:
@@ -991,6 +1001,8 @@ components:
         id:
           type: string
           format: uuid
+          x-oapi-codegen-extra-tags:
+            gorm: "primaryKey"
         title:
           type: string
         position:
@@ -1029,6 +1041,8 @@ components:
         id:
           type: string
           format: uuid
+          x-oapi-codegen-extra-tags:
+            gorm: "primaryKey"
         title:
           type: string
         projectId:
@@ -1057,6 +1071,8 @@ components:
         id:
           type: string
           format: uuid
+          x-oapi-codegen-extra-tags:
+            gorm: "primaryKey"
         name:
           type: string
         private:
@@ -1112,6 +1128,8 @@ components:
         id:
           type: string
           format: uuid
+          x-oapi-codegen-extra-tags:
+            gorm: "primaryKey"
         name:
           type: string
         private:
@@ -1151,6 +1169,8 @@ components:
         id:
           type: string
           format: uuid
+          x-oapi-codegen-extra-tags:
+            gorm: "primaryKey"
         username:
           type: string
         password:
@@ -1195,6 +1215,8 @@ components:
         id:
           type: string
           format: uuid
+          x-oapi-codegen-extra-tags:
+            gorm: "primaryKey"
         name:
           type: string
         owner:
