@@ -1,4 +1,11 @@
 openapi: 3.0.0
+info:
+  title: Project Management
+  description: Description
+  version: 0.0.1
+  contact: {}
+tags: []
+servers: []
 paths:
   /users:
     get:
@@ -12,14 +19,14 @@ paths:
               schema:
                 type: object
   /users/{userId}:
+    parameters:
+      - name: userId
+        required: true
+        in: path
+        schema:
+          type: string
     get:
       operationId: GetUser
-      parameters:
-        - name: userId
-          required: true
-          in: path
-          schema:
-            type: string
       responses:
         "200":
           description: ""
@@ -29,12 +36,6 @@ paths:
                 $ref: "#/components/schemas/User"
     patch:
       operationId: UpdateUser
-      parameters:
-        - name: userId
-          required: true
-          in: path
-          schema:
-            type: string
       requestBody:
         required: true
         content:
@@ -50,12 +51,6 @@ paths:
                 $ref: "#/components/schemas/User"
     delete:
       operationId: DeleteUser
-      parameters:
-        - name: userId
-          required: true
-          in: path
-          schema:
-            type: string
       responses:
         "200":
           description: ""
@@ -73,14 +68,14 @@ paths:
                 items:
                   $ref: "#/components/schemas/Team"
   /orgs/{orgId}/teams:
+    parameters:
+      - name: orgId
+        required: true
+        in: path
+        schema:
+          type: string
     get:
       operationId: GetAllTeamsInOrg
-      parameters:
-        - name: orgId
-          required: true
-          in: path
-          schema:
-            type: string
       responses:
         "200":
           description: ""
@@ -92,12 +87,6 @@ paths:
                   $ref: "#/components/schemas/Team"
     post:
       operationId: CreateTeam
-      parameters:
-        - name: orgId
-          required: true
-          in: path
-          schema:
-            type: string
       requestBody:
         required: true
         content:
@@ -112,19 +101,19 @@ paths:
               schema:
                 $ref: "#/components/schemas/Team"
   /orgs/{orgId}/teams/{teamId}:
+    parameters:
+      - name: orgId
+        required: true
+        in: path
+        schema:
+          type: string
+      - name: teamId
+        required: true
+        in: path
+        schema:
+          type: string
     get:
       operationId: GetTeam
-      parameters:
-        - name: orgId
-          required: true
-          in: path
-          schema:
-            type: string
-        - name: teamId
-          required: true
-          in: path
-          schema:
-            type: string
       responses:
         "200":
           description: ""
@@ -134,12 +123,6 @@ paths:
                 $ref: "#/components/schemas/Team"
     post:
       operationId: AddUserToTeam
-      parameters:
-        - name: teamId
-          required: true
-          in: path
-          schema:
-            type: string
       requestBody:
         required: true
         content:
@@ -155,17 +138,6 @@ paths:
                 $ref: "#/components/schemas/Team"
     delete:
       operationId: DeleteTeam
-      parameters:
-        - name: orgId
-          required: true
-          in: path
-          schema:
-            type: string
-        - name: teamId
-          required: true
-          in: path
-          schema:
-            type: string
       responses:
         "204":
           description: ""
@@ -199,14 +171,14 @@ paths:
               schema:
                 $ref: "#/components/schemas/Organisation"
   /orgs/{orgId}:
+    parameters:
+      - name: orgId
+        required: true
+        in: path
+        schema:
+          type: string
     get:
-      operationId: OrganisationController_getById
-      parameters:
-        - name: orgId
-          required: true
-          in: path
-          schema:
-            type: string
+      operationId: GetOrganisation
       responses:
         "200":
           description: ""
@@ -215,13 +187,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Organisation"
     post:
-      operationId: OrganisationController_addUserToOrganisation
-      parameters:
-        - name: orgId
-          required: true
-          in: path
-          schema:
-            type: string
+      operationId: AddUserToOrganisation
       requestBody:
         required: true
         content:
@@ -236,25 +202,19 @@ paths:
               schema:
                 $ref: "#/components/schemas/Organisation"
     delete:
-      operationId: OrganisationController_delete
-      parameters:
-        - name: orgId
-          required: true
-          in: path
-          schema:
-            type: string
+      operationId: DeleteOrganisation
       responses:
         "204":
           description: ""
   /projects/{projectId}/tasks:
+    parameters:
+      - name: projectId
+        required: true
+        in: path
+        schema:
+          type: string
     get:
-      operationId: TaskController_findAll
-      parameters:
-        - name: /tasks
-          required: true
-          in: path
-          schema:
-            type: string
+      operationId: GetAllTasks
       responses:
         "200":
           description: ""
@@ -265,13 +225,7 @@ paths:
                 items:
                   $ref: "#/components/schemas/Task"
     post:
-      operationId: TaskController_create
-      parameters:
-        - name: projectId
-          required: true
-          in: path
-          schema:
-            type: string
+      operationId: CreateTask
       requestBody:
         required: true
         content:
@@ -287,7 +241,7 @@ paths:
                 $ref: "#/components/schemas/Task"
   /projects/{projectId}/backlog/tasks:
     get:
-      operationId: TaskController_findBacklog
+      operationId: GetBacklog
       parameters:
         - name: projectId
           required: true
@@ -304,14 +258,19 @@ paths:
                 items:
                   $ref: "#/components/schemas/Task"
   /projects/{projectId}/tasks/{taskId}:
+    parameters:
+      - name: projectId
+        required: true
+        in: path
+        schema:
+          type: string
+      - name: taskId
+        required: true
+        in: path
+        schema:
+          type: string
     get:
-      operationId: TaskController_find
-      parameters:
-        - name: taskId
-          required: true
-          in: path
-          schema:
-            type: string
+      operationId: GetTask
       responses:
         "200":
           description: ""
@@ -320,13 +279,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Task"
     patch:
-      operationId: TaskController_update
-      parameters:
-        - name: taskId
-          required: true
-          in: path
-          schema:
-            type: string
+      operationId: UpdateTask
       requestBody:
         required: true
         content:
@@ -341,25 +294,24 @@ paths:
               schema:
                 $ref: "#/components/schemas/Task"
     delete:
-      operationId: TaskController_delete
-      parameters:
-        - name: taskId
-          required: true
-          in: path
-          schema:
-            type: string
+      operationId: DeleteTask
       responses:
         "204":
           description: ""
   /projects/{projectId}/board/columns/{columnId}/tasks:
+    parameters:
+      - name: projectId
+        required: true
+        in: path
+        schema:
+          type: string
+      - name: columnId
+        required: true
+        in: path
+        schema:
+          type: string
     get:
-      operationId: TaskController_findAllForColumn
-      parameters:
-        - name: columnId
-          required: true
-          in: path
-          schema:
-            type: string
+      operationId: GetAllTasksInColumn
       responses:
         "200":
           description: ""
@@ -370,13 +322,7 @@ paths:
                 items:
                   $ref: "#/components/schemas/Task"
     post:
-      operationId: TaskController_createInColumn
-      parameters:
-        - name: columnId
-          required: true
-          in: path
-          schema:
-            type: string
+      operationId: CreateTaskInColumn
       requestBody:
         required: true
         content:
@@ -390,65 +336,15 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Task"
-  /projects/{projectId}/board/columns/{columnId}/tasks/{taskId}/subtasks:
-    post:
-      operationId: TaskController_createSubtask
-      parameters:
-        - name: taskId
-          required: true
-          in: path
-          schema:
-            type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/CreateSubtaskDto"
-      responses:
-        "201":
-          description: ""
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Subtask"
-  /projects/{projectId}/tasks/{taskId}/subtasks/{subtaskId}:
-    patch:
-      operationId: TaskController_updateSubtask
-      parameters:
-        - name: subtaskId
-          required: true
-          in: path
-          schema:
-            type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/UpdateSubtaskDto"
-      responses:
-        "200":
-          description: ""
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Subtask"
-    delete:
-      operationId: TaskController_deleteSubtask
-      parameters:
-        - name: subtaskId
-          required: true
-          in: path
-          schema:
-            type: string
-      responses:
-        "204":
-          description: ""
   /projects/{projectId}/tasks/states:
     post:
-      operationId: TaskStateController_createTaskState
-      parameters: []
+      operationId: CreateTaskState
+      parameters:
+        - name: projectId
+          required: true
+          in: path
+          schema:
+            type: string
       requestBody:
         required: true
         content:
@@ -464,7 +360,7 @@ paths:
                 $ref: "#/components/schemas/TaskState"
   /tasks/{taskId}/subtasks:
     post:
-      operationId: SubtaskController_create
+      operationId: CreateSubtask
       parameters:
         - name: taskId
           required: true
@@ -485,14 +381,19 @@ paths:
               schema:
                 $ref: "#/components/schemas/Subtask"
   /tasks/{taskId}/subtasks/{subtaskId}:
+    parameters:
+      - name: taskId
+        required: true
+        in: path
+        schema:
+          type: string
+      - name: subtaskId
+        required: true
+        in: path
+        schema:
+          type: string
     patch:
-      operationId: SubtaskController_update
-      parameters:
-        - name: subtaskId
-          required: true
-          in: path
-          schema:
-            type: string
+      operationId: UpdateSubtask
       requestBody:
         required: true
         content:
@@ -507,19 +408,13 @@ paths:
               schema:
                 $ref: "#/components/schemas/Subtask"
     delete:
-      operationId: SubtaskController_deleteSubtask
-      parameters:
-        - name: subtaskId
-          required: true
-          in: path
-          schema:
-            type: string
+      operationId: DeleteSubtask
       responses:
         "204":
           description: ""
   /tasks/{taskId}/comments:
     post:
-      operationId: TaskCommentController_create
+      operationId: CreateTaskComment
       parameters:
         - name: taskId
           required: true
@@ -540,14 +435,19 @@ paths:
               schema:
                 $ref: "#/components/schemas/TaskComment"
   /tasks/{taskId}/comments/{commentId}:
+    parameters:
+      - name: taskId
+        required: true
+        in: path
+        schema:
+          type: string
+      - name: commentId
+        required: true
+        in: path
+        schema:
+          type: string
     patch:
-      operationId: TaskCommentController_update
-      parameters:
-        - name: commentId
-          required: true
-          in: path
-          schema:
-            type: string
+      operationId: UpdateTaskComment
       requestBody:
         required: true
         content:
@@ -562,25 +462,19 @@ paths:
               schema:
                 $ref: "#/components/schemas/TaskComment"
     delete:
-      operationId: TaskCommentController_delete
-      parameters:
-        - name: commentId
-          required: true
-          in: path
-          schema:
-            type: string
+      operationId: DeleteTaskComment
       responses:
         "204":
           description: ""
   /projects/{projectId}/sprints:
+    parameters:
+      - name: projectId
+        required: true
+        in: path
+        schema:
+          type: string
     get:
-      operationId: SprintController_findAll
-      parameters:
-        - name: projectId
-          required: true
-          in: path
-          schema:
-            type: string
+      operationId: GetAllSprints
       responses:
         "200":
           description: ""
@@ -591,13 +485,7 @@ paths:
                 items:
                   $ref: "#/components/schemas/Sprint"
     post:
-      operationId: SprintController_create
-      parameters:
-        - name: projectId
-          required: true
-          in: path
-          schema:
-            type: string
+      operationId: CreateSprint
       requestBody:
         required: true
         content:
@@ -612,14 +500,19 @@ paths:
               schema:
                 $ref: "#/components/schemas/Sprint"
   /projects/{projectId}/sprints/{sprintId}:
+    parameters:
+      - name: projectId
+        required: true
+        in: path
+        schema:
+          type: string
+      - name: sprintId
+        required: true
+        in: path
+        schema:
+          type: string
     get:
-      operationId: SprintController_findById
-      parameters:
-        - name: sprintId
-          required: true
-          in: path
-          schema:
-            type: string
+      operationId: GetSprint
       responses:
         "200":
           description: ""
@@ -628,13 +521,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Sprint"
     patch:
-      operationId: SprintController_update
-      parameters:
-        - name: sprintId
-          required: true
-          in: path
-          schema:
-            type: string
+      operationId: UpdateSprint
       requestBody:
         required: true
         content:
@@ -649,19 +536,13 @@ paths:
               schema:
                 $ref: "#/components/schemas/Sprint"
     delete:
-      operationId: SprintController_delete
-      parameters:
-        - name: sprintId
-          required: true
-          in: path
-          schema:
-            type: string
+      operationId: DeleteSprint
       responses:
         "204":
           description: ""
   /projects:
     get:
-      operationId: ProjectController_getAllForUser
+      operationId: GetAllProjectsForUser
       parameters: []
       responses:
         "200":
@@ -674,7 +555,7 @@ paths:
                   $ref: "#/components/schemas/Project"
   /projects/{projectId}:
     get:
-      operationId: ProjectController_getById
+      operationId: GetProject
       parameters:
         - name: projectId
           required: true
@@ -690,7 +571,7 @@ paths:
                 $ref: "#/components/schemas/Project"
   /projects/{projectId}/members:
     get:
-      operationId: ProjectController_getAllMember
+      operationId: GetAllProjectMembers
       parameters:
         - name: projectId
           required: true
@@ -708,7 +589,7 @@ paths:
                   $ref: "#/components/schemas/User"
   /orgs/{orgId}/projects:
     get:
-      operationId: ProjectController_getAllInOrg
+      operationId: GetAllProjectsInOrganisation
       parameters:
         - name: orgId
           required: true
@@ -725,14 +606,19 @@ paths:
                 items:
                   $ref: "#/components/schemas/Project"
   /orgs/{orgId}/teams/{teamId}/projects:
+    parameters:
+      - name: orgId
+        required: true
+        in: path
+        schema:
+          type: string
+      - name: teamId
+        required: true
+        in: path
+        schema:
+          type: string
     get:
-      operationId: ProjectController_getAllInTeam
-      parameters:
-        - name: teamId
-          required: true
-          in: path
-          schema:
-            type: string
+      operationId: GetAllProjectsInTeam
       responses:
         "200":
           description: ""
@@ -743,18 +629,7 @@ paths:
                 items:
                   $ref: "#/components/schemas/Project"
     post:
-      operationId: ProjectController_create
-      parameters:
-        - name: orgId
-          required: true
-          in: path
-          schema:
-            type: string
-        - name: teamId
-          required: true
-          in: path
-          schema:
-            type: string
+      operationId: CreateProject
       requestBody:
         required: true
         content:
@@ -769,24 +644,24 @@ paths:
               schema:
                 $ref: "#/components/schemas/Project"
   /orgs/{orgId}/teams/{teamId}/projects/{projectId}:
+    parameters:
+      - name: orgId
+        required: true
+        in: path
+        schema:
+          type: string
+      - name: teamId
+        required: true
+        in: path
+        schema:
+          type: string
+      - name: projectId
+        required: true
+        in: path
+        schema:
+          type: string
     post:
-      operationId: ProjectController_addUserToProject
-      parameters:
-        - name: orgId
-          required: true
-          in: path
-          schema:
-            type: string
-        - name: teamId
-          required: true
-          in: path
-          schema:
-            type: string
-        - name: projectId
-          required: true
-          in: path
-          schema:
-            type: string
+      operationId: AddUserToProject
       requestBody:
         required: true
         content:
@@ -801,19 +676,13 @@ paths:
               schema:
                 $ref: "#/components/schemas/Project"
     delete:
-      operationId: ProjectController_delete
-      parameters:
-        - name: projectId
-          required: true
-          in: path
-          schema:
-            type: string
+      operationId: DeleteProject
       responses:
         "204":
           description: ""
   /projects/{projectId}/board:
     get:
-      operationId: BoardController_getBoard
+      operationId: GetBoard
       parameters:
         - name: projectId
           required: true
@@ -828,14 +697,14 @@ paths:
               schema:
                 $ref: "#/components/schemas/Board"
   /projects/{projectId}/board/columns:
+    parameters:
+      - name: projectId
+        required: true
+        in: path
+        schema:
+          type: string
     get:
-      operationId: BoardController_getAllColumns
-      parameters:
-        - name: projectId
-          required: true
-          in: path
-          schema:
-            type: string
+      operationId: GetAllColumns
       responses:
         "200":
           description: ""
@@ -846,13 +715,7 @@ paths:
                 items:
                   $ref: "#/components/schemas/BoardColumn"
     post:
-      operationId: BoardController_createColumn
-      parameters:
-        - name: projectId
-          required: true
-          in: path
-          schema:
-            type: string
+      operationId: CreateColumn
       requestBody:
         required: true
         content:
@@ -867,19 +730,19 @@ paths:
               schema:
                 $ref: "#/components/schemas/BoardColumn"
   /projects/{projectId}/board/columns/{columnId}:
+    parameters:
+      - name: projectId
+        required: true
+        in: path
+        schema:
+          type: string
+      - name: columnId
+        required: true
+        in: path
+        schema:
+          type: string
     get:
-      operationId: BoardController_getColumn
-      parameters:
-        - name: projectId
-          required: true
-          in: path
-          schema:
-            type: string
-        - name: columnId
-          required: true
-          in: path
-          schema:
-            type: string
+      operationId: GetColumn
       responses:
         "200":
           description: ""
@@ -888,13 +751,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/BoardColumn"
     patch:
-      operationId: BoardController_updatedColumn
-      parameters:
-        - name: columnId
-          required: true
-          in: path
-          schema:
-            type: string
+      operationId: UpdateColumn
       requestBody:
         required: true
         content:
@@ -909,19 +766,13 @@ paths:
               schema:
                 $ref: "#/components/schemas/BoardColumn"
     delete:
-      operationId: BoardController_deleteColumn
-      parameters:
-        - name: columnId
-          required: true
-          in: path
-          schema:
-            type: string
+      operationId: DeleteColumn
       responses:
         "200":
           description: ""
   /login:
     post:
-      operationId: AuthController_signIn
+      operationId: Login
       parameters: []
       requestBody:
         required: true
@@ -934,7 +785,7 @@ paths:
           description: ""
   /register:
     post:
-      operationId: AuthController_signUp
+      operationId: Register
       parameters: []
       requestBody:
         required: true
@@ -945,13 +796,6 @@ paths:
       responses:
         "201":
           description: ""
-info:
-  title: Project Management
-  description: Description
-  version: 0.0.1
-  contact: {}
-tags: []
-servers: []
 components:
   schemas:
     TaskState:
