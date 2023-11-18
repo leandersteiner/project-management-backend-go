@@ -270,16 +270,16 @@ type UpdateUserDto struct {
 
 // User defines model for User.
 type User struct {
-	CreatedAt     time.Time          `json:"createdAt"`
-	Email         string             `json:"email"`
-	Id            openapi_types.UUID `json:"id"`
-	IsDeleted     bool               `json:"isDeleted"`
-	Organisations []Organisation     `json:"organisations"`
-	Password      string             `json:"password"`
-	Projects      []Project          `json:"projects"`
-	Teams         []Team             `json:"teams"`
-	UpdatedAt     time.Time          `json:"updatedAt"`
-	Username      string             `json:"username"`
+	CreatedAt     time.Time            `json:"createdAt"`
+	Email         string               `json:"email"`
+	Id            openapi_types.UUID   `json:"id"`
+	IsDeleted     bool                 `json:"isDeleted"`
+	Organisations []Organisation       `json:"organisations"`
+	Password      string               `json:"password"`
+	Projects      []Project            `json:"projects"`
+	TeamIds       []openapi_types.UUID `json:"teamIds"`
+	UpdatedAt     time.Time            `json:"updatedAt"`
+	Username      string               `json:"username"`
 }
 
 // LoginJSONRequestBody defines body for Login for application/json ContentType.
