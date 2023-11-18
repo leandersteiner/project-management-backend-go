@@ -803,10 +803,12 @@ components:
       properties:
         id:
           type: string
+          format: uuid
         name:
           type: string
-        project:
-          $ref: "#/components/schemas/Project"
+        projectId:
+          type: string
+          format: uuid
         boardColumns:
           type: array
           items:
@@ -820,7 +822,7 @@ components:
       required:
         - id
         - name
-        - project
+        - projectId
         - boardColumns
         - createdAt
         - updatedAt
@@ -829,14 +831,17 @@ components:
       properties:
         id:
           type: string
+          format: uuid
         name:
           type: string
         done:
           type: boolean
-        task:
-          $ref: "#/components/schemas/Task"
-        creator:
-          $ref: "#/components/schemas/User"
+        taskId:
+          type: string
+          format: uuid
+        creatorId:
+          type: string
+          format: uuid
         createdAt:
           format: date-time
           type: string
@@ -847,8 +852,8 @@ components:
         - id
         - name
         - done
-        - task
-        - creator
+        - taskId
+        - creatorId
         - createdAt
         - updatedAt
     TaskComment:
@@ -856,12 +861,15 @@ components:
       properties:
         id:
           type: string
+          format: uuid
         comment:
           type: string
-        creator:
-          $ref: "#/components/schemas/User"
-        task:
-          $ref: "#/components/schemas/Task"
+        creatorId:
+          type: string
+          format: uuid
+        taskId:
+          type: string
+          format: uuid
         createdAt:
           format: date-time
           type: string
@@ -871,8 +879,8 @@ components:
       required:
         - id
         - comment
-        - creator
-        - task
+        - creatorId
+        - taskId
         - createdAt
         - updatedAt
     Sprint:
@@ -880,6 +888,7 @@ components:
       properties:
         id:
           type: string
+          format: uuid
         name:
           type: string
         start:
@@ -888,8 +897,9 @@ components:
         end:
           format: date-time
           type: string
-        project:
-          $ref: "#/components/schemas/Project"
+        projectId:
+          type: string
+          format: uuid
         tasks:
           type: array
           items:
@@ -905,7 +915,7 @@ components:
         - name
         - start
         - end
-        - project
+        - projectId
         - tasks
         - createdAt
         - updatedAt
@@ -914,6 +924,7 @@ components:
       properties:
         id:
           type: string
+          format: uuid
         name:
           type: string
         description:
@@ -924,16 +935,15 @@ components:
           type: number
         position:
           type: number
-        assignee:
-          $ref: "#/components/schemas/User"
         assigneeId:
           type: string
-        taskState:
-          $ref: "#/components/schemas/TaskState"
+          format: uuid
         taskStateId:
           type: string
-        creator:
-          $ref: "#/components/schemas/User"
+          format: uuid
+        creatorId:
+          type: string
+          format: uuid
         subtasks:
           type: array
           items:
@@ -942,18 +952,15 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/TaskComment"
-        sprint:
-          $ref: "#/components/schemas/Sprint"
         sprintId:
           type: string
-        boardColumn:
-          $ref: "#/components/schemas/BoardColumn"
+          format: uuid
         boardColumnId:
           type: string
-        project:
-          $ref: "#/components/schemas/Project"
+          format: uuid
         projectId:
           type: string
+          format: uuid
         createdAt:
           format: date-time
           type: string
@@ -967,18 +974,14 @@ components:
         - done
         - priority
         - position
-        - assignee
         - assigneeId
-        - taskState
         - taskStateId
-        - creator
+        - creatorId
         - subtasks
         - comments
         - sprint
         - sprintId
-        - boardColumn
         - boardColumnId
-        - project
         - projectId
         - createdAt
         - updatedAt
@@ -987,6 +990,7 @@ components:
       properties:
         id:
           type: string
+          format: uuid
         title:
           type: string
         position:
@@ -995,12 +999,14 @@ components:
           $ref: "#/components/schemas/TaskState"
         taskStateId:
           type: string
+          format: uuid
         tasks:
           type: array
           items:
             $ref: "#/components/schemas/Task"
-        board:
-          $ref: "#/components/schemas/Board"
+        boardId:
+          type: string
+          format: uuid
         createdAt:
           format: date-time
           type: string
@@ -1014,7 +1020,7 @@ components:
         - taskState
         - taskStateId
         - tasks
-        - board
+        - boardId
         - createdAt
         - updatedAt
     Board:
@@ -1022,10 +1028,12 @@ components:
       properties:
         id:
           type: string
+          format: uuid
         title:
           type: string
-        project:
-          $ref: "#/components/schemas/Project"
+        projectId:
+          type: string
+          format: uuid
         columns:
           type: array
           items:
@@ -1039,7 +1047,7 @@ components:
       required:
         - id
         - title
-        - project
+        - projectId
         - columns
         - createdAt
         - updatedAt
@@ -1048,14 +1056,17 @@ components:
       properties:
         id:
           type: string
+          format: uuid
         name:
           type: string
         private:
           type: boolean
-        owner:
-          $ref: "#/components/schemas/User"
-        team:
-          $ref: "#/components/schemas/Team"
+        ownerId:
+          type: string
+          format: uuid
+        teamId:
+          type: string
+          format: uuid
         members:
           type: array
           items:
@@ -1086,8 +1097,8 @@ components:
         - id
         - name
         - private
-        - owner
-        - team
+        - ownerId
+        - teamId
         - members
         - boards
         - tasks
@@ -1100,6 +1111,7 @@ components:
       properties:
         id:
           type: string
+          format: uuid
         name:
           type: string
         private:
@@ -1114,8 +1126,9 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/Project"
-        organisation:
-          $ref: "#/components/schemas/Organisation"
+        organisationId:
+          type: string
+          format: uuid
         createdAt:
           format: date-time
           type: string
@@ -1129,7 +1142,7 @@ components:
         - owner
         - members
         - projects
-        - organisation
+        - organisationId
         - createdAt
         - updatedAt
     User:
@@ -1137,6 +1150,7 @@ components:
       properties:
         id:
           type: string
+          format: uuid
         username:
           type: string
         password:
@@ -1179,6 +1193,7 @@ components:
       properties:
         id:
           type: string
+          format: uuid
         name:
           type: string
         owner:
