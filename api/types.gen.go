@@ -28,7 +28,7 @@ type AddUserToTeamDto struct {
 type Board struct {
 	Columns   []BoardColumn      `json:"columns"`
 	CreatedAt time.Time          `json:"createdAt"`
-	Id        openapi_types.UUID `json:"id"`
+	Id        openapi_types.UUID `gorm:"primaryKey" json:"id"`
 	ProjectId openapi_types.UUID `json:"projectId"`
 	Title     string             `json:"title"`
 	UpdatedAt time.Time          `json:"updatedAt"`
@@ -38,7 +38,7 @@ type Board struct {
 type BoardColumn struct {
 	BoardId     openapi_types.UUID `json:"boardId"`
 	CreatedAt   time.Time          `json:"createdAt"`
-	Id          openapi_types.UUID `json:"id"`
+	Id          openapi_types.UUID `gorm:"primaryKey" json:"id"`
 	Position    float32            `json:"position"`
 	TaskState   TaskState          `json:"taskState"`
 	TaskStateId openapi_types.UUID `json:"taskStateId"`
@@ -124,7 +124,7 @@ type LoginUserDto struct {
 // Organisation defines model for Organisation.
 type Organisation struct {
 	CreatedAt time.Time          `json:"createdAt"`
-	Id        openapi_types.UUID `json:"id"`
+	Id        openapi_types.UUID `gorm:"primaryKey" json:"id"`
 	Members   []User             `json:"members"`
 	Name      string             `json:"name"`
 	Owner     User               `json:"owner"`
@@ -136,7 +136,7 @@ type Organisation struct {
 type Project struct {
 	Boards     []Board            `json:"boards"`
 	CreatedAt  time.Time          `json:"createdAt"`
-	Id         openapi_types.UUID `json:"id"`
+	Id         openapi_types.UUID `gorm:"primaryKey" json:"id"`
 	Members    []User             `json:"members"`
 	Name       string             `json:"name"`
 	OwnerId    openapi_types.UUID `json:"ownerId"`
@@ -152,7 +152,7 @@ type Project struct {
 type Sprint struct {
 	CreatedAt time.Time          `json:"createdAt"`
 	End       time.Time          `json:"end"`
-	Id        openapi_types.UUID `json:"id"`
+	Id        openapi_types.UUID `gorm:"primaryKey" json:"id"`
 	Name      string             `json:"name"`
 	ProjectId openapi_types.UUID `json:"projectId"`
 	Start     time.Time          `json:"start"`
@@ -165,7 +165,7 @@ type Subtask struct {
 	CreatedAt time.Time          `json:"createdAt"`
 	CreatorId openapi_types.UUID `json:"creatorId"`
 	Done      bool               `json:"done"`
-	Id        openapi_types.UUID `json:"id"`
+	Id        openapi_types.UUID `gorm:"primaryKey" json:"id"`
 	Name      string             `json:"name"`
 	TaskId    openapi_types.UUID `json:"taskId"`
 	UpdatedAt time.Time          `json:"updatedAt"`
@@ -180,7 +180,7 @@ type Task struct {
 	CreatorId     openapi_types.UUID `json:"creatorId"`
 	Description   string             `json:"description"`
 	Done          bool               `json:"done"`
-	Id            openapi_types.UUID `json:"id"`
+	Id            openapi_types.UUID `gorm:"primaryKey" json:"id"`
 	Name          string             `json:"name"`
 	Position      float32            `json:"position"`
 	Priority      float32            `json:"priority"`
@@ -196,7 +196,7 @@ type TaskComment struct {
 	Comment   string             `json:"comment"`
 	CreatedAt time.Time          `json:"createdAt"`
 	CreatorId openapi_types.UUID `json:"creatorId"`
-	Id        openapi_types.UUID `json:"id"`
+	Id        openapi_types.UUID `gorm:"primaryKey" json:"id"`
 	TaskId    openapi_types.UUID `json:"taskId"`
 	UpdatedAt time.Time          `json:"updatedAt"`
 }
@@ -205,7 +205,7 @@ type TaskComment struct {
 type TaskState struct {
 	BoardColumns []BoardColumn      `json:"boardColumns"`
 	CreatedAt    time.Time          `json:"createdAt"`
-	Id           openapi_types.UUID `json:"id"`
+	Id           openapi_types.UUID `gorm:"primaryKey" json:"id"`
 	Name         string             `json:"name"`
 	ProjectId    openapi_types.UUID `json:"projectId"`
 	UpdatedAt    time.Time          `json:"updatedAt"`
@@ -214,7 +214,7 @@ type TaskState struct {
 // Team defines model for Team.
 type Team struct {
 	CreatedAt      time.Time          `json:"createdAt"`
-	Id             openapi_types.UUID `json:"id"`
+	Id             openapi_types.UUID `gorm:"primaryKey" json:"id"`
 	Members        []User             `json:"members"`
 	Name           string             `json:"name"`
 	OrganisationId openapi_types.UUID `json:"organisationId"`
@@ -272,7 +272,7 @@ type UpdateUserDto struct {
 type User struct {
 	CreatedAt     time.Time            `json:"createdAt"`
 	Email         string               `json:"email"`
-	Id            openapi_types.UUID   `json:"id"`
+	Id            openapi_types.UUID   `gorm:"primaryKey" json:"id"`
 	IsDeleted     bool                 `json:"isDeleted"`
 	Organisations []Organisation       `json:"organisations"`
 	Password      string               `json:"password"`
